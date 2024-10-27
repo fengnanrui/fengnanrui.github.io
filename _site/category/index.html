@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-
-  <head>
+<head>
+    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,9 +37,8 @@
      crossorigin="anonymous"></script>
 </head>
 
-
-  <body>
-
+</head>
+<body>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">Nanru1</a>
@@ -95,7 +94,8 @@
                         </a>
                     </li>
                     
-                   
+                
+                    
                     <li>
                         
                         <a href="/about/">
@@ -117,6 +117,7 @@
 </header>
 
 
+    <div class="container">
         <div class="page clearfix">
     <div class="left">
         <h1>Categories</h1>
@@ -218,105 +219,6 @@
                         </li>
                         
                     
-                        
-                        <li>
-                            <time>
-                            2015-04-23 Thu.
-                            </time>
-                            <a class="title" href="/2015/04/23/baidu-ife-2-javascript/">百度Web前端技术学院(2)-JavaScript 基础</a>
-
-                            
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#JavaScript" title="Category: JavaScript" rel="category">JavaScript</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                            
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#Baidu" title="Tag: Baidu" rel="tag">Baidu</a>&nbsp;
-    
-        <a href="/tag/#ife" title="Tag: ife" rel="tag">ife</a>&nbsp;
-    
-        <a href="/tag/#JavaScript" title="Tag: JavaScript" rel="tag">JavaScript</a>&nbsp;
-    
-        <a href="/tag/#正则" title="Tag: 正则" rel="tag">正则</a>&nbsp;
-    
-        <a href="/tag/#Regular" title="Tag: Regular" rel="tag">Regular</a>
-    
-  
-
-</span>
-
-                        </li>
-                        
-                    
-                
-            
-            <h2 id="Tools">Tools</h2>
-                
-                    
-                        
-                    
-                
-                    
-                        
-                        <li>
-                            <time>
-                            2015-05-18 Mon.
-                            </time>
-                            <a class="title" href="/2015/05/18/front-end-tools/">前端的一些资料和工具</a>
-
-                            
-
-
-<!-- <span class="point">•</span> -->
-<span class="categories">
-  <i class="fa fa-th-list"></i>
-  
-    
-        <a href="/category/#Tools" title="Category: Tools" rel="category">Tools</a>
-    
-  
-
-  <!-- <span class="point">•</span> -->
-</span>
-
-
-                            
-<!-- <span class="point">•</span> -->
-<span class="pageTag">
-  <i class="fa fa-tags"></i>
-  
-    
-        <a href="/tag/#tools" title="Tag: tools" rel="tag">tools</a>&nbsp;
-    
-        <a href="/tag/#CSS" title="Tag: CSS" rel="tag">CSS</a>&nbsp;
-    
-        <a href="/tag/#reveal" title="Tag: reveal" rel="tag">reveal</a>&nbsp;
-    
-        <a href="/tag/#配色" title="Tag: 配色" rel="tag">配色</a>
-    
-  
-
-</span>
-
-                        </li>
-                        
-                    
                 
             
             <h2 id="Interview">Interview</h2>
@@ -387,13 +289,7 @@
                     
                         <li>
                             <a data-scroll href="#JavaScript">
-                                JavaScript (3)
-                            </a>
-                        </li>
-                    
-                        <li>
-                            <a data-scroll href="#Tools">
-                                Tools (1)
+                                JavaScript (2)
                             </a>
                         </li>
                     
@@ -412,6 +308,7 @@
 </div>
 <script src="/js/pageContent.js " charset="utf-8"></script>
 
+    </div>
 
     <footer class="site-footer">
 
@@ -419,7 +316,7 @@
     <div class="wrapper">
 
         <p class="description">
-             本站记录我研究和学习记录 
+             本站归档着我的研究记录 
         </p>
         <p class="contact">
             Contact me at: 
@@ -445,16 +342,44 @@
     </a>
 </div>
 
-    <script src=" /js/main.js " charset="utf-8"></script>
-    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+
+    <!-- 添加音乐播放器容器 -->
+    <div id="xf-MusicPlayer" 
+         data-cdnName="https://player.xfyun.club/js" 
+         data-themeColor="xf-girlPink" 
+         data-random="true"
+         data-bottomHeight="100px"
+         data-memory="1"
+         data-songChart="热歌榜"
+         data-lyrics="1"
+         data-randomSongList="1"
+		 data-localMusic="/data/playlistData.json">
+    </div>
+
+    <!-- 引入音乐播放器的JS文件 -->
+    <script src="https://player.xfyun.club/js/xf-MusicPlayer/js/xf-MusicPlayer.min.js"></script>
+
+    <script src="/js/main.js" charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js" charset="utf-8"></script>
     <script type="text/javascript">
       smoothScroll.init({
         speed: 500, // Integer. How fast to complete the scroll in milliseconds
         easing: 'easeInOutCubic', // Easing pattern to use
         offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
       });
-    </script>
-    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
-  </body>
 
+      // JavaScript 代码来处理页面切换时的音频播放逻辑
+      document.addEventListener('visibilitychange', function() {
+        var audio = document.getElementById('background-audio');
+        if (document.hidden) {
+          // 页面失去焦点时暂停音频
+          audio.pause();
+        } else {
+          // 页面获得焦点时继续播放音频
+          audio.play();
+        }
+      });
+    </script>
+    <!-- <script src="/js/scroll.min.js" charset="utf-8"></script> -->
+</body>
 </html>

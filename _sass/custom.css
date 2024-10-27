@@ -1,0 +1,76 @@
+/* custom.css */
+
+/* 音频播放器容器 */
+.audio-player-container {
+  position: fixed;
+  bottom: 0; /* 距离底部的距离 */
+  left: 0; /* 距离左边的距离 */
+  z-index: 1000 !important; /* 确保播放器在其他元素之上 */
+  width: 250px; /* 容器宽度 */
+  height: 80px; /* 容器高度 */
+  background-color: #f0f0f0 !important; /* 背景颜色 */
+  border-radius: 5px !important; /* 圆角 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important; /* 阴影效果 */
+  padding: 10px !important; /* 内边距 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 音频播放器 */
+.audio-player {
+  width: 100% !important; /* 播放器宽度 */
+  height: 100% !important; /* 播放器高度 */
+  background-color: transparent !important; /* 背景颜色 */
+  border: none !important; /* 去掉边框 */
+  outline: none !important; /* 去掉焦点轮廓 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 控制条 */
+.audio-player controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 音频播放进度条 */
+.audio-player progress {
+  width: 100% !important;
+  height: 10px !important;
+  background-color: #ddd !important;
+  margin-top: 5px !important;
+}
+
+/* 音频播放进度条的填充部分 */
+.audio-player progress::-webkit-progress-value {
+  background-color: #ff5722 !important;
+}
+
+/* 音频播放进度条的空白部分 */
+.audio-player progress::-webkit-progress-bar {
+  background-color: #ddd !important;
+}
+
+/* 最小化按钮 */
+.minimize-button {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: #333 !important;
+  font-size: 16px !important;
+  padding: 5px !important;
+}
+
+/* 最小化按钮悬停效果 */
+.minimize-button:hover {
+  color: #ff5722 !important;
+}
+
+/* 最小化状态 */
+.audio-player-container.minimized {
+  height: 30px !important; /* 最小化后的高度 */
+  overflow: hidden !important; /* 隐藏多余内容 */
+}

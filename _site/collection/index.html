@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-
-  <head>
+<head>
+    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,9 +37,8 @@
      crossorigin="anonymous"></script>
 </head>
 
-
-  <body>
-
+</head>
+<body>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">Nanru1</a>
@@ -94,8 +93,9 @@
                             <i class="fa fa-bookmark"></i>Collections
                         </a>
                     </li>
-                                  
-                   
+                    
+                
+                    
                     <li>
                         
                         <a href="/about/">
@@ -117,12 +117,14 @@
 </header>
 
 
+    <div class="container">
         <div class="page clearfix" post>
     <div class="left">
         <h1>Collections</h1>
         <hr>
         <ul id="markdown-toc">
   <li><a href="#工具" id="markdown-toc-工具">工具</a></li>
+  <li><a href="#gitbook-及其插件" id="markdown-toc-gitbook-及其插件">GitBook 及其插件</a></li>
   <li><a href="#comments" id="markdown-toc-comments">Comments</a></li>
 </ul>
 
@@ -134,9 +136,41 @@
 
     <p>生成 box-shadow 的工具。</p>
   </li>
-<h2 id="编程语言">编程语言</h2>
+  <li>
+    <p><a href="http://www.cssmatic.com/gradient-generator">gradient-generator</a></p>
 
+    <p>渐变生成器。</p>
   </li>
+  <li>
+    <p><a href="http://www.colorzilla.com/gradient-editor/">Ultimate CSS Gradient Generator</a></p>
+
+    <p>也是渐变生成器</p>
+  </li>
+  <li>
+    <p><a href="http://www.cssreflex.com/css-generators/">CSS Generators -CSSREFLEX</a></p>
+
+    <p>CSS3 生成器</p>
+  </li>
+  <li>
+    <p><a href="https://tinypng.com/">tiny png</a></p>
+
+    <p>用于压缩 png 或 jpg 的在线工具</p>
+  </li>
+  <li>
+    <p><a href="https://sm.ms/">图床 https://sm.ms/</a></p>
+
+    <p>有 API 可用。</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/Suxiaogang/WeiboPicBed">新浪微博图床 Chrome扩展</a></p>
+  </li>
+</ul>
+
+<h2 id="gitbook-及其插件">GitBook 及其插件</h2>
+
+<ul>
+  <li><a href="http://zhaoda.net/2015/11/09/gitbook-plugins/">Gitbook 的使用和常用插件 -赵达</a></li>
+  <li><a href="https://plugins.gitbook.com/plugin/expandable-chapters">gitbook-plugin-expandable-chapters</a></li>
 </ul>
 
 <h2 id="comments">Comments</h2>
@@ -187,6 +221,7 @@
 </div>
 <script src="/js/pageContent.js " charset="utf-8"></script>
 
+    </div>
 
     <footer class="site-footer">
 
@@ -194,7 +229,7 @@
     <div class="wrapper">
 
         <p class="description">
-             本站记录我研究和学习记录 
+             本站归档着我的研究记录 
         </p>
         <p class="contact">
             Contact me at: 
@@ -220,16 +255,44 @@
     </a>
 </div>
 
-    <script src=" /js/main.js " charset="utf-8"></script>
-    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+
+    <!-- 添加音乐播放器容器 -->
+    <div id="xf-MusicPlayer" 
+         data-cdnName="https://player.xfyun.club/js" 
+         data-themeColor="xf-girlPink" 
+         data-random="true"
+         data-bottomHeight="100px"
+         data-memory="1"
+         data-songChart="热歌榜"
+         data-lyrics="1"
+         data-randomSongList="1"
+		 data-localMusic="/data/playlistData.json">
+    </div>
+
+    <!-- 引入音乐播放器的JS文件 -->
+    <script src="https://player.xfyun.club/js/xf-MusicPlayer/js/xf-MusicPlayer.min.js"></script>
+
+    <script src="/js/main.js" charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js" charset="utf-8"></script>
     <script type="text/javascript">
       smoothScroll.init({
         speed: 500, // Integer. How fast to complete the scroll in milliseconds
         easing: 'easeInOutCubic', // Easing pattern to use
         offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
       });
-    </script>
-    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
-  </body>
 
+      // JavaScript 代码来处理页面切换时的音频播放逻辑
+      document.addEventListener('visibilitychange', function() {
+        var audio = document.getElementById('background-audio');
+        if (document.hidden) {
+          // 页面失去焦点时暂停音频
+          audio.pause();
+        } else {
+          // 页面获得焦点时继续播放音频
+          audio.play();
+        }
+      });
+    </script>
+    <!-- <script src="/js/scroll.min.js" charset="utf-8"></script> -->
+</body>
 </html>

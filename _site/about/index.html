@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-
-  <head>
+<head>
+    <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,9 +37,8 @@
      crossorigin="anonymous"></script>
 </head>
 
-
-  <body>
-
+</head>
+<body>
     <header id="top">
     <div class="wrapper">
         <a href="/" class="brand">Nanru1</a>
@@ -95,7 +94,8 @@
                         </a>
                     </li>
                     
-                   
+                
+                    
                     <li>
                         
                         <a class="active" href="/about/">
@@ -117,6 +117,7 @@
 </header>
 
 
+    <div class="container">
         <div class="page clearfix" post>
     <div class="left">
         <h1>About</h1>
@@ -142,7 +143,7 @@
 
 <h2 id="友情链接">友情链接</h2>
 
-<p><a href="http://zhangwenli.com/blog">羡辙杂俎</a> | <a href="https://www.anotherhome.net">Anotherhome</a> | <a href="http://reverland.org/">Reverland</a> | <a href="http://lizhipower.github.io/">ZhiLi</a> | <a href="http://simmer-jun.github.io/">Simmer</a> | <a href="http://awthink.net/">awthink</a> | <a href="http://aralic.github.io/">Aralic</a> | <a href="http://www.chen9.info/">zchen9</a> | <a href="http://wuhuaji.me/">wuhuaji</a> | <a href="http://www.lishengcn.cn/">lisheng</a> | <a href="http://axuebin.com/blog/">薛彬XueBin</a> | <a href="http://www.tboox.org/cn/">TBOOX</a> |  <a href="http://linglinyp.com/">Ling</a></p>
+<p><a href="https://github.com/fengnanrui">暂无</a> |</p>
 
 <h2 id="comments">Comments</h2>
 
@@ -192,6 +193,7 @@
 </div>
 <script src="/js/pageContent.js " charset="utf-8"></script>
 
+    </div>
 
     <footer class="site-footer">
 
@@ -199,7 +201,7 @@
     <div class="wrapper">
 
         <p class="description">
-             本站记录我研究和学习记录 
+             本站归档着我的研究记录 
         </p>
         <p class="contact">
             Contact me at: 
@@ -225,16 +227,44 @@
     </a>
 </div>
 
-    <script src=" /js/main.js " charset="utf-8"></script>
-    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+
+    <!-- 添加音乐播放器容器 -->
+    <div id="xf-MusicPlayer" 
+         data-cdnName="https://player.xfyun.club/js" 
+         data-themeColor="xf-girlPink" 
+         data-random="true"
+         data-bottomHeight="100px"
+         data-memory="1"
+         data-songChart="热歌榜"
+         data-lyrics="1"
+         data-randomSongList="1"
+		 data-localMusic="/data/playlistData.json">
+    </div>
+
+    <!-- 引入音乐播放器的JS文件 -->
+    <script src="https://player.xfyun.club/js/xf-MusicPlayer/js/xf-MusicPlayer.min.js"></script>
+
+    <script src="/js/main.js" charset="utf-8"></script>
+    <script src="/js/smooth-scroll.min.js" charset="utf-8"></script>
     <script type="text/javascript">
       smoothScroll.init({
         speed: 500, // Integer. How fast to complete the scroll in milliseconds
         easing: 'easeInOutCubic', // Easing pattern to use
         offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
       });
-    </script>
-    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
-  </body>
 
+      // JavaScript 代码来处理页面切换时的音频播放逻辑
+      document.addEventListener('visibilitychange', function() {
+        var audio = document.getElementById('background-audio');
+        if (document.hidden) {
+          // 页面失去焦点时暂停音频
+          audio.pause();
+        } else {
+          // 页面获得焦点时继续播放音频
+          audio.play();
+        }
+      });
+    </script>
+    <!-- <script src="/js/scroll.min.js" charset="utf-8"></script> -->
+</body>
 </html>

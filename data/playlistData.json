@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "name": "Viva La Vida",
+        "artistsname": "Coldplay",
+        "picurl": "./data/Coldplay.jpg",
+        "url": "./data/vivalavida.mp3",
+        "musicDuration": "04:02"
+    },
+    {
+        "id": "2",
+        "name": "I Want My Tears Back",
+        "artistsname": "Nightwish",
+        "picurl": "./data/Nightwish.jpg",
+        "url": "./data/IWantMyTearsBack.mp3",
+        "musicDuration": "05:07"
+    },
+    {
+        "id": "3",
+        "name": "Fade",
+        "artistsname": "Alan Walker",
+        "picurl": "./data/AlanWalker.jpg",
+        "url": "./data/fade.m4a",
+        "musicDuration": "04:24"
+    }
+]
