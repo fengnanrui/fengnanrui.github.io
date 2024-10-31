@@ -3,7 +3,7 @@ layout: post
 title:  "监控某项Azure服务或其他业务并发送邮件的方法"
 date:   2024-10-31 14:06:05
 categories: Azure
-tags: Powershell Azure Scripts
+tags: Powershell Azure Scripts APP KEY
 excerpt: 本文例子为监控应用注册客户端密钥有效期的Powershell脚本
 ---
 
