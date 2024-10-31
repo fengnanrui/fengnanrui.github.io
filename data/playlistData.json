@@ -17,6 +17,14 @@
     },
     {
         "id": "3",
+        "name": "Something Just Like This",
+        "artistsname": "Coldplay",
+        "picurl": "/data/Coldplay.jpg",
+        "url": "/data/04.mp3",
+        "musicDuration": "04:07"
+    },
+    {
+        "id": "4",
         "name": "Fade",
         "artistsname": "Alan Walker",
         "picurl": "/data/AlanWalker.jpg",
