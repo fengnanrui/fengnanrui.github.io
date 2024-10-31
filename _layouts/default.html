@@ -2,10 +2,10 @@
 <html>
 <head>
     {% include head.html %}
+	<link rel="stylesheet" href="{{ '/css/mouse.css' | relative_url }}">
 </head>
 <body>
     {% include header.html %}
-
     <div class="container">
         {{ content }}
     </div>
@@ -16,14 +16,14 @@
     <!-- 添加音乐播放器容器 -->
     <div id="xf-MusicPlayer" 
          data-cdnName="https://player.xfyun.club/js" 
-         data-themeColor="xf-girlPink" 
+         data-themeColor="xf-sky" 
          data-random="true"
          data-bottomHeight="100px"
          data-memory="1"
          data-songChart="热歌榜"
          data-lyrics="1"
          data-randomSongList="1"
-		 data-localMusic="/data/playlistData.json">
+         data-localMusic="/data/playlistData.json">
     </div>
 
     <!-- 引入音乐播放器的JS文件 -->
