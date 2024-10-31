@@ -1,0 +1,19 @@
+/* 默认鼠标指针样式 */
+html, body, a, button, input, textarea, select {
+    cursor: url('/css/arrow.cur'), auto;
+}
+
+/* 点击鼠标指针样式 */
+html:active, body:active, a:active, button:active, input:active, textarea:active, select:active {
+    cursor: url('/css/hand.cur'), auto;
+}
+
+/* 悬停鼠标指针样式 */
+a:hover, button:hover, input:hover, textarea:hover, select:hover {
+    cursor: url('/css/arrow.cur'), auto;
+}
+
+/* 禁用状态鼠标指针样式 */
+button:disabled, input:disabled, textarea:disabled, select:disabled {
+    cursor: url('/css/arrow.cur'), auto;
+}
