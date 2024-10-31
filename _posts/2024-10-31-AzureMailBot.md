@@ -2,7 +2,7 @@
 layout: post
 title:  "监控某项Azure服务或其他业务并发送邮件的方法"
 date:   2024-10-31 14:06:05
-categories: Azure
+categories: Powershell
 tags: Powershell Azure Scripts APP KEY
 excerpt: 本文例子为监控应用注册客户端密钥有效期的Powershell脚本
 ---
@@ -10,11 +10,12 @@ excerpt: 本文例子为监控应用注册客户端密钥有效期的Powershell�
 * content
 {:toc}
 
-## 问题背景
+# 问题背景
 
 需要监控应用注册客户端密钥有效期。该脚本可修改配合其他客户需求进行使用。
+---
 
-### 问题调查
+## 问题调查
 
 × 目前Outlook邮箱2024年9月起无法使用旧式基本身份验证，仅支持OAuth，遂排除  
 × 163邮箱应用密码有效期180天，排除  
@@ -24,18 +25,19 @@ excerpt: 本文例子为监控应用注册客户端密钥有效期的Powershell�
 ---
 
 ## 方案脚本示例
+---
 
 ### 登录Azure账户, 本地使用
 ```
 Connect-AzAccount -Environment AzureChinaCloud
 ```
-
-# 登录Azure账户，自动化帐户调用托管标识使用
+---
+### 登录Azure账户，自动化帐户调用托管标识使用
 ```
 Connect-AzAccount -EnvironmentName azurechinacloud -Identity
 ```
-
-# 定义参数和脚本主体
+---
+### 定义参数和脚本主体
 ```
 $appId = "ad43de94-a2a1-xxxxxxxx"# 指定应用的对象ID
 $daysBeforeExpiryStartSending = 30 # 提前多少天开始发送提醒
