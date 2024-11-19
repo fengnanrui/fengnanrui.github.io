@@ -45,14 +45,11 @@ $formattedDate = $currentDate.ToString("yyyy-MM-dd")
 $subscriptionId = "your-subscription-id"  # 请替换为你的订阅ID
 $Location = "chinaeast"                   # 请替换为你的位置
 
-# 定义一个包含多个磁盘名称及其对应资源组的哈希表
+# 定义一个包含多个磁盘名称及其对应资源组的表
 $DiskNamesAndResourceGroups = @(
-    @{ DiskName = "cnazuvm036-osdisk-20220206-152307"; ResourceGroup = "az-cne-prd-kscc-erp" },
-    @{ DiskName = "cnazuvm036-datadisk-000-2022"; ResourceGroup = "az-cne-prd-kscc-erp" },
-    @{ DiskName = "cnazuvm036-datadisk-001-2022"; ResourceGroup = "az-cne-prd-kscc-erp" },
-    @{ DiskName = "cnazuvm036-datadisk-002-20220206-152307"; ResourceGroup = "az-cne-prd-kscc-erp" },
-    @{ DiskName = "CNAZUVM50_OsDisk_1_31d9ff6f314d4b3"; ResourceGroup = "FGT_GROUP" },
-    @{ DiskName = "CNAZUVM50_DataDisk_0"; ResourceGroup = "FGT_GROUP" }
+    @{ DiskName = "XXXXX"; ResourceGroup = "XXXXX" },
+    @{ DiskName = "XXXXX"; ResourceGroup = "XXXXX" },
+    @{ DiskName = "XXXXX"; ResourceGroup = "XXXXX" }
 )
 
 # 初始化结果列表
