@@ -1,0 +1,70 @@
+{
+  "name": "modern-jekyll-blog",
+  "version": "1.0.0",
+  "description": "A modern Jekyll blog with document upload functionality",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "sass css/modern.scss:css/modern.css --style=compressed",
+    "build:js": "terser js/modern.js -o js/modern.min.js --compress --mangle",
+    "watch": "npm run watch:css & npm run watch:js",
+    "watch:css": "sass css/modern.scss:css/modern.css --watch",
+    "watch:js": "nodemon --watch js/modern.js --exec 'npm run build:js'",
+    "serve": "bundle exec jekyll serve --livereload",
+    "dev": "npm run watch & npm run serve",
+    "clean": "bundle exec jekyll clean",
+    "test": "bundle exec jekyll build && htmlproofer ./_site",
+    "lint:css": "stylelint 'css/**/*.scss'",
+    "lint:js": "eslint js/modern.js",
+    "lint": "npm run lint:css && npm run lint:js",
+    "format": "prettier --write 'css/**/*.scss' 'js/**/*.js' '_layouts/**/*.html' '_includes/**/*.html'",
+    "optimize:images": "imagemin 'assets/images/**/*.{jpg,jpeg,png}' --out-dir='assets/images/optimized'",
+    "deploy": "npm run build && bundle exec jekyll build"
+  },
+  "keywords": [
+    "jekyll",
+    "blog",
+    "modern",
+    "responsive",
+    "markdown",
+    "upload",
+    "github-pages"
+  ],
+  "author": "Nanru1 <fengnanrui@163.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.69.0",
+    "terser": "^5.24.0",
+    "nodemon": "^3.0.1",
+    "eslint": "^8.52.0",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard-scss": "^11.1.0",
+    "prettier": "^3.0.3",
+    "htmlproofer": "^4.4.0",
+    "imagemin": "^8.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.2"
+  },
+  "dependencies": {
+    "marked": "^9.1.2",
+    "highlight.js": "^11.9.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fengnanrui/fengnanrui.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fengnanrui/fengnanrui.github.io/issues"
+  },
+  "homepage": "https://nanru1.com"
+}
+

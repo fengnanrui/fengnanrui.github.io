@@ -1,64 +1,293 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
-
 # Site settings
-title: Nanru1‘s Blog
-brief-intro: Azure Support Engineer
+title: "Nanru1's Blog"
+email: fengnanrui@163.com
+description: >-
+  Azure Support Engineer | 专注云服务技术分享与实践
+  分享Azure云服务、DevOps实践和现代化开发技术
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://nanru1.com" # the base hostname & protocol for your site
+twitter_username: 
+github_username: fengnanrui
+linkedin_username: 
 
-permalink: /:year/:month/:day/:title/
-
-# other links
-twitter_username:
-facebook_username: 
-github_username:  fengnanrui
-email: fengnanrui@163.com
-weibo_username: 7543229523
-zhihu_username: 
-linkedIn_username: 
-dribbble_username:
-
-description_footer: 本站归档着我的研究记录
-
-# comments
-# two ways to comment, only choose one, and use your own short name
-# 两种评论插件，选一个就好了，使用自己的 short_name
-duoshuo_shortname: #hygblog
-disqus_shortname: nanru1-github-io
-
-# statistic analysis 统计代码
-# 百度统计 id，将统计代码替换为自己的百度统计id，即
-# hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
-# xxxxx字符串
-baidu_tongji_id: b1ceef8b4095cd0bf38aab64474e2f60
-#google_analytics_id: UA-72449510-4 # google 分析追踪id
+# Author information
+author:
+  name: Nanru1
+  email: fengnanrui@163.com
+  bio: "Azure Support Engineer，专注于云服务技术分享与实践"
+  avatar: "/assets/images/avatar.jpg"
+  location: "China"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/fengnanrui"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:fengnanrui@163.com"
 
 # Build settings
 markdown: kramdown
+highlighter: rouge
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-archives
+  - jekyll-redirect-from
+  - jekyll-compose
 
+# Pagination
+paginate: 10
+paginate_path: "/page:num/"
+
+# Archives
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+    - year
+    - month
+  layouts:
+    category: archive-taxonomy
+    tag: archive-taxonomy
+    year: archive-year
+    month: archive-month
+  permalinks:
+    category: '/category/:name/'
+    tag: '/tag/:name/'
+    year: '/archive/:year/'
+    month: '/archive/:year/:month/'
+
+# Collections
+collections:
+  pages:
+    output: true
+    permalink: /:name/
+
+# Defaults
+defaults:
+  # Posts
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Nanru1"
+      show_excerpts: true
+      comments: true
+  # Pages
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+
+# Kramdown settings
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
 
-# port
-# port: 8888
-#host: 0.0.0.0
-port: 8080
-# url
-category_dir: category/
-tag_dir: tag/
+# Rouge settings
+rouge:
+  default_lang: console
 
-# excerpt
-excerpt_separator: "\n\n\n\n"
+# SEO settings
+lang: zh-CN
+timezone: Asia/Shanghai
 
-# paginate
-gems: [jekyll-paginate]
-paginate: 10
+# Social media
+social:
+  name: Nanru1
+  links:
+    - https://github.com/fengnanrui
+    - https://linkedin.com/in/fengnanrui
 
-plugins:
-  - jekyll-paginate
+# Google Analytics
+google_analytics: # Add your GA tracking ID here
+
+# Baidu Analytics
+baidu_tongji_id: # Add your Baidu Tongji ID here
+
+# Comments (using Disqus)
+disqus:
+  shortname: # Add your Disqus shortname here
+
+# Search
+search: true
+search_full_content: true
+
+# Reading time
+reading_time: true
+
+# Related posts
+related_posts: true
+
+# Table of contents
+toc: true
+
+# Modern theme settings
+modern_theme:
+  # Color scheme
+  primary_color: "#2563eb"
+  secondary_color: "#7c3aed"
+  
+  # Typography
+  font_family: "Inter"
+  code_font_family: "JetBrains Mono"
+  
+  # Features
+  dark_mode: true
+  search_enabled: true
+  reading_progress: true
+  back_to_top: true
+  
+  # Upload settings
+  upload_enabled: true
+  github_integration: true
+  
+  # Performance
+  lazy_loading: true
+  image_optimization: true
+  css_minification: true
+  js_minification: true
+
+# GitHub integration for uploads
+github:
+  repository: "fengnanrui/fengnanrui.github.io"
+  branch: "main"
+  posts_directory: "_posts"
+  
+# Upload restrictions
+upload:
+  max_file_size: 5242880 # 5MB in bytes
+  allowed_extensions: [".md", ".markdown"]
+  auto_commit: true
+  commit_message: "Add new post via upload"
+
+# Performance settings
+sass:
+  style: compressed
+  
+# Compression
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: []
+  blanklines: false
+  profile: false
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+  - LICENSE
+  - package.json
+  - package-lock.json
+  - webpack.config.js
+  - gulpfile.js
+  - .gitignore
+  - .git/
+  - .vscode/
+  - .idea/
+
+# Include files
+include:
+  - _pages
+  - .htaccess
+  - _redirects
+
+# Liquid settings
+liquid:
+  error_mode: warn
+  strict_filters: false
+  strict_variables: false
+
+# Markdown extensions
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+# Permalink style
+permalink: /:year/:month/:day/:title/
+
+# Excerpt separator
+excerpt_separator: <!--more-->
+
+# Show drafts
+show_drafts: false
+
+# Future posts
+future: false
+
+# Unpublished posts
+unpublished: false
+
+# Limit posts
+limit_posts: 0
+
+# Keep files
+keep_files:
+  - .git
+  - .svn
+
+# Encoding
+encoding: "utf-8"
+
+# Markdown processor
+markdown_processor: kramdown
+
+# Incremental build
+incremental: false
+
+# Profile build time
+profile: false
+
+# Safe mode
+safe: false
+
+# Plugins directory
+plugins_dir: _plugins
+
+# Layouts directory
+layouts_dir: _layouts
+
+# Data directory
+data_dir: _data
+
+# Includes directory
+includes_dir: _includes
+
+# Collections directory
+collections_dir: ""
+
+# Cache directory
+cache_dir: .jekyll-cache
+
+# Strict front matter
+strict_front_matter: false
+
+# Liquid profiler
+liquid_profiler: false
+
+# Disable disk cache
+disable_disk_cache: false
+
+# Ignore theme configuration
+ignore_theme_config: false
+
