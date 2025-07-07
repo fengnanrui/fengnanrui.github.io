@@ -1,0 +1,22 @@
+---
+# Modern Jekyll Blog Styles
+---
+
+@charset "utf-8";
+
+// Import modern design system
+@import "modern-variables";
+@import "modern-base";
+@import "modern-header";
+@import "modern-home";
+
+// Import existing components (updated)
+@import "syntax-highlighting";
+@import "backToTop";
+
+// Additional modern components
+@import "modern-post";
+@import "modern-auth";
+@import "modern-upload";
+@import "modern-footer";
+

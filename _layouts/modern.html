@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% if page.title %}{{ page.title | escape }} | {{ site.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+    <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+    <meta name="author" content="{{ site.author | default: 'Nanru1' }}">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+    <meta property="og:description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+    <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    {% if page.image %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}">
+    {% endif %}
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}">
+    <meta name="twitter:description" content="{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}">
+    {% if page.image %}
+    <meta name="twitter:image" content="{{ page.image | absolute_url }}">
+    {% endif %}
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/apple-touch-icon.png' | relative_url }}">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{{ '/css/modern.css' | relative_url }}">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    
+    <!-- CSRF Token for Security -->
+    <meta name="csrf-token" content="{{ site.csrf_token | default: 'csrf-token-placeholder' }}">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebSite{% endif %}",
+        "name": "{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}",
+        "description": "{{ page.excerpt | default: site.description | strip_html | normalize_whitespace | truncate: 160 | escape }}",
+        "url": "{{ page.url | absolute_url }}",
+        {% if page.layout == 'post' %}
+        "author": {
+            "@type": "Person",
+            "name": "{{ page.author | default: site.author | default: 'Nanru1' }}"
+        },
+        "datePublished": "{{ page.date | date_to_xmlschema }}",
+        "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+        {% endif %}
+        "publisher": {
+            "@type": "Organization",
+            "name": "{{ site.title }}",
+            "url": "{{ site.url }}"
+        }
+    }
+    </script>
+    
+    <!-- Analytics -->
+    {% if site.google_analytics %}
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
+    </script>
+    {% endif %}
+    
+    {% if site.baidu_tongji_id %}
+    <!-- Baidu Analytics -->
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?{{ site.baidu_tongji_id }}";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    {% endif %}
+</head>
+
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="sr-only">跳转到主要内容</a>
+    
+    <!-- Reading Progress Bar -->
+    {% if page.layout == 'post' %}
+    <div class="reading-progress">
+        <div class="progress-bar" id="reading-progress-bar"></div>
+    </div>
+    {% endif %}
+    
+    <!-- Site Header -->
+    <header class="site-header" id="site-header">
+        <div class="header-container">
+            <!-- Logo and Site Title -->
+            <a href="{{ '/' | relative_url }}" class="site-logo">
+                <div class="logo-icon">N</div>
+                <span>{{ site.title | default: "Nanru1's Blog" }}</span>
+            </a>
+            
+            <!-- Navigation -->
+            <nav class="site-nav" id="site-nav">
+                <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">首页</a>
+                <a href="{{ '/archive/' | relative_url }}" class="nav-link {% if page.url contains '/archive' %}active{% endif %}">归档</a>
+                <a href="{{ '/category/' | relative_url }}" class="nav-link {% if page.url contains '/category' %}active{% endif %}">分类</a>
+                <a href="{{ '/tag/' | relative_url }}" class="nav-link {% if page.url contains '/tag' %}active{% endif %}">标签</a>
+                <a href="{{ '/upload/' | relative_url }}" class="nav-link {% if page.url contains '/upload' %}active{% endif %}">上传</a>
+                <a href="{{ '/about/' | relative_url }}" class="nav-link {% if page.url contains '/about' %}active{% endif %}">关于</a>
+            </nav>
+            
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <!-- Search Toggle -->
+                <button class="search-toggle" id="search-toggle" aria-label="搜索">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </button>
+                
+                <!-- Theme Toggle -->
+                <button class="theme-toggle" id="theme-toggle" aria-label="切换主题">
+                    <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                    <svg class="theme-icon moon-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                </button>
+                
+                <!-- Login/User Profile -->
+                <div class="auth-section" id="auth-section">
+                    <!-- Login Button (shown when not authenticated) -->
+                    <button class="login-btn" id="login-btn">
+                        <svg class="login-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                            <polyline points="10,17 15,12 10,7"></polyline>
+                            <line x1="15" y1="12" x2="3" y2="12"></line>
+                        </svg>
+                        登录
+                    </button>
+                    
+                    <!-- User Profile (shown when authenticated) -->
+                    <div class="user-profile hidden" id="user-profile">
+                        <button class="profile-trigger" id="profile-trigger">
+                            <img src="" alt="用户头像" class="avatar" id="user-avatar">
+                            <span class="username" id="username"></span>
+                            <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6,9 12,15 18,9"></polyline>
+                            </svg>
+                        </button>
+                        
+                        <div class="profile-dropdown" id="profile-dropdown">
+                            <a href="{{ '/upload/' | relative_url }}" class="dropdown-item">
+                                <svg class="item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14,2 14,8 20,8"></polyline>
+                                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    <polyline points="10,9 9,9 8,9"></polyline>
+                                </svg>
+                                文档管理
+                            </a>
+                            <a href="{{ '/profile/' | relative_url }}" class="dropdown-item">
+                                <svg class="item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                个人资料
+                            </a>
+                            <a href="{{ '/settings/' | relative_url }}" class="dropdown-item">
+                                <svg class="item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                                </svg>
+                                设置
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item danger" id="logout-btn">
+                                <svg class="item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16,17 21,12 16,7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                退出登录
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="菜单">
+                    <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main id="main-content">
+        {{ content }}
+    </main>
+    
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <!-- Footer Brand -->
+                <div class="footer-brand">
+                    <a href="{{ '/' | relative_url }}" class="brand-logo">
+                        <div class="logo-icon">N</div>
+                        <span class="brand-name">{{ site.title | default: "Nanru1's Blog" }}</span>
+                    </a>
+                    <p class="brand-description">{{ site.description | default: "专注于Azure技术分享和实践经验" }}</p>
+                    <div class="social-links">
+                        {% if site.github_username %}
+                        <a href="https://github.com/{{ site.github_username }}" class="social-link" target="_blank" rel="noopener">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                        {% if site.email %}
+                        <a href="mailto:{{ site.email }}" class="social-link">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                        {% endif %}
+                        {% if site.linkedin_username %}
+                        <a href="https://linkedin.com/in/{{ site.linkedin_username }}" class="social-link" target="_blank" rel="noopener">
+                            <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3 class="section-title">快速链接</h3>
+                    <ul class="section-links">
+                        <li class="link-item">
+                            <a href="{{ '/archive/' | relative_url }}" class="footer-link">文章归档</a>
+                        </li>
+                        <li class="link-item">
+                            <a href="{{ '/category/' | relative_url }}" class="footer-link">分类浏览</a>
+                        </li>
+                        <li class="link-item">
+                            <a href="{{ '/tag/' | relative_url }}" class="footer-link">标签云</a>
+                        </li>
+                        <li class="link-item">
+                            <a href="{{ '/feed.xml' | relative_url }}" class="footer-link">RSS订阅</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div class="footer-section">
+                    <h3 class="section-title">资源</h3>
+                    <ul class="section-links">
+                        <li class="link-item">
+                            <a href="{{ '/about/' | relative_url }}" class="footer-link">关于我</a>
+                        </li>
+                        <li class="link-item">
+                            <a href="{{ '/contact/' | relative_url }}" class="footer-link">联系方式</a>
+                        </li>
+                        <li class="link-item">
+                            <a href="{{ '/privacy/' | relative_url }}" class="footer-link">隐私政策</a>
+                        </li>
+                        <li class="link-item">
+                            <a href="{{ '/terms/' | relative_url }}" class="footer-link">使用条款</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div class="footer-section newsletter-section">
+                    <h3 class="section-title">订阅更新</h3>
+                    <p>获取最新的技术文章和更新通知</p>
+                    <form class="newsletter-form" id="newsletter-form">
+                        <input type="email" class="email-input" placeholder="输入您的邮箱" required>
+                        <button type="submit" class="subscribe-btn">订阅</button>
+                    </form>
+                    <p class="newsletter-note">我们尊重您的隐私，不会发送垃圾邮件。</p>
+                </div>
+            </div>
+            
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; {{ 'now' | date: "%Y" }} {{ site.title | default: "Nanru1's Blog" }}. 保留所有权利。</p>
+                </div>
+                <div class="footer-links">
+                    <a href="{{ '/sitemap.xml' | relative_url }}" class="footer-link">网站地图</a>
+                    <a href="{{ '/privacy/' | relative_url }}" class="footer-link">隐私政策</a>
+                    <a href="{{ '/terms/' | relative_url }}" class="footer-link">使用条款</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top" aria-label="返回顶部">
+        <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18,15 12,9 6,15"></polyline>
+        </svg>
+    </button>
+    
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-modal">
+            <input type="text" class="search-input" id="search-input" placeholder="搜索文章..." autocomplete="off">
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+    
+    <!-- Auth Modal -->
+    <div class="auth-modal" id="auth-modal">
+        <div class="auth-container">
+            <div class="auth-header">
+                <div class="auth-logo">A</div>
+                <h2 class="auth-title">登录到您的账户</h2>
+                <p class="auth-subtitle">使用Azure AD进行安全登录</p>
+            </div>
+            
+            <div class="security-notice">
+                <svg class="notice-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <div class="notice-content">
+                    <div class="notice-title">安全登录</div>
+                    <div class="notice-text">我们使用企业级Azure AD认证确保您的账户安全。</div>
+                </div>
+            </div>
+            
+            <button class="saml-login-btn" id="saml-login-btn">
+                <svg class="azure-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M13.05 2.24L7.4 4.64a.5.5 0 0 0-.3.46v11.8a.5.5 0 0 0 .3.46l5.65 2.4a.5.5 0 0 0 .4 0l5.65-2.4a.5.5 0 0 0 .3-.46V5.1a.5.5 0 0 0-.3-.46L13.45 2.24a.5.5 0 0 0-.4 0z"/>
+                </svg>
+                使用Azure AD登录
+            </button>
+            
+            <div class="auth-footer">
+                <p class="privacy-notice">
+                    登录即表示您同意我们的 <a href="{{ '/terms/' | relative_url }}">使用条款</a> 和 <a href="{{ '/privacy/' | relative_url }}">隐私政策</a>。
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script src="{{ '/js/modern.js' | relative_url }}"></script>
+    
+    <!-- Service Worker for PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('{{ "/sw.js" | relative_url }}')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    }).catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
+
