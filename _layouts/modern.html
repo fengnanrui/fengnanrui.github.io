@@ -403,6 +403,17 @@
             });
         }
     </script>
+    <script>
+   // 确保DOM加载完成后执行
+   document.addEventListener('DOMContentLoaded', function() {
+     // 立即应用当前主题
+     const currentTheme = localStorage.getItem('blog-theme') || 'light';
+     document.documentElement.setAttribute('data-theme', currentTheme);
+     
+     // 调试日志
+     console.log('Applied theme on page load:', currentTheme);
+   });
+   </script>
 </body>
 </html>
 
