@@ -1,9 +1,257 @@
 ---
-layout: upload
-title: 文档上传
-description: 上传和管理您的Markdown文档，支持在线编辑和GitHub同步
+layout: modern
+title: 文件上传
 permalink: /upload/
 ---
 
-<!-- Content is handled by the upload layout -->
+<div class="upload-container">
+  <div class="upload-header">
+    <h1>文件上传</h1>
+    <p>请选择要上传的Markdown文件</p>
+  </div>
+  
+  <div class="upload-form">
+    <div class="upload-area" id="upload-area">
+      <svg class="upload-icon" viewBox="0 0 24 24" width="48" height="48" stroke="currentColor" stroke-width="1" fill="none">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" y1="3" x2="12" y2="15"></line>
+      </svg>
+      <div class="upload-text">拖放文件到此处或点击上传</div>
+      <input type="file" id="file-input" class="file-input" accept=".md,.markdown" multiple />
+    </div>
+    
+    <div class="upload-progress" id="upload-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 0%"></div>
+      </div>
+      <div class="progress-text">0%</div>
+    </div>
+    
+    <div class="upload-files" id="upload-files">
+      <!-- 上传的文件会显示在这里 -->
+    </div>
+    
+    <div class="upload-actions">
+      <button id="submit-btn" class="upload-btn" disabled>提交上传</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .upload-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+  }
+  
+  .upload-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+  
+  .upload-area {
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: var(--space-lg);
+    transition: all 0.3s ease;
+  }
+  
+  .upload-area:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary-light);
+  }
+  
+  .upload-icon {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .upload-progress {
+    display: none;
+    margin: var(--space-md) 0;
+  }
+  
+  .progress-bar {
+    height: 8px;
+    background-color: var(--color-border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background-color: var(--color-primary);
+    width: 0;
+    transition: width 0.3s ease;
+  }
+  
+  .progress-text {
+    text-align: center;
+    margin-top: var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+  
+  .upload-files {
+    margin: var(--space-lg) 0;
+  }
+  
+  .file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .file-name {
+    font-weight: var(--font-weight-medium);
+  }
+  
+  .file-size {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+  
+  .file-remove {
+    color: var(--color-error);
+    cursor: pointer;
+    padding: var(--space-xs);
+    border-radius: var(--radius-sm);
+    background: none;
+    border: none;
+  }
+  
+  .upload-btn {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .upload-btn:hover {
+    background-color: var(--color-primary-hover);
+    transform: translateY(-2px);
+  }
+  
+  .upload-btn:disabled {
+    background-color: var(--color-text-muted);
+    transform: none;
+    cursor: not-allowed;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const uploadArea = document.getElementById('upload-area');
+    const fileInput = document.getElementById('file-input');
+    const uploadFiles = document.getElementById('upload-files');
+    const submitBtn = document.getElementById('submit-btn');
+    
+    // 点击上传区域触发文件选择
+    uploadArea.addEventListener('click', () => {
+      fileInput.click();
+    });
+    
+    // 处理文件选择
+    fileInput.addEventListener('change', handleFiles);
+    
+    // 拖放功能
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('drag-over');
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.classList.remove('drag-over');
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('drag-over');
+      if (e.dataTransfer.files.length) {
+        handleFiles({ target: { files: e.dataTransfer.files } });
+      }
+    });
+    
+    function handleFiles(e) {
+      const files = Array.from(e.target.files);
+      const mdFiles = files.filter(file => 
+        file.name.endsWith('.md') || file.name.endsWith('.markdown'));
+      
+      if (mdFiles.length === 0) {
+        alert('请选择Markdown格式(.md或.markdown)的文件');
+        return;
+      }
+      
+      // 清空已有文件
+      uploadFiles.innerHTML = '';
+      
+      // 添加文件到列表
+      mdFiles.forEach(file => {
+        const fileItem = document.createElement('div');
+        fileItem.className = 'file-item';
+        
+        const fileInfo = document.createElement('div');
+        fileInfo.className = 'file-info';
+        
+        const fileName = document.createElement('div');
+        fileName.className = 'file-name';
+        fileName.textContent = file.name;
+        
+        const fileSize = document.createElement('div');
+        fileSize.className = 'file-size';
+        fileSize.textContent = formatSize(file.size);
+        
+        fileInfo.appendChild(fileName);
+        fileInfo.appendChild(fileSize);
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'file-remove';
+        removeBtn.textContent = '删除';
+        removeBtn.addEventListener('click', () => {
+          fileItem.remove();
+          updateSubmitButton();
+        });
+        
+        fileItem.appendChild(fileInfo);
+        fileItem.appendChild(removeBtn);
+        uploadFiles.appendChild(fileItem);
+      });
+      
+      updateSubmitButton();
+    }
+    
+    function updateSubmitButton() {
+      submitBtn.disabled = uploadFiles.children.length === 0;
+    }
+    
+    function formatSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    // 处理提交
+    submitBtn.addEventListener('click', () => {
+      alert('文件上传功能仅做示例，实际上传需要后端支持');
+    });
+  });
+</script>
 

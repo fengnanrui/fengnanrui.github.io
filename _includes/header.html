@@ -1,34 +1,49 @@
-<header id="top">
-    <div class="wrapper">
-        <a href="{{ site.baseurl }}/" class="brand">{{ site.title }}</a>
-        <small>{{site.brief-intro}}</small>
-        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
-        <nav id="headerNav">
-            <ul>
-                <li>
-                    {% if page.url == '/' %}
-                    <a class="active" href="{{site.baseurl}}/">
-                        {% else %}
-                    <a href="{{site.baseurl}}/">
-                    {% endif %}
-                        <i class="fa fa-home"></i>Home
-                    </a>
-                </li>
-
-                {% for my_page in site.pages %}
-                    {% if my_page.type == 'page' %}
-                    <li>
-                        {% if my_page.url == page.url %}
-                        <a class="active" href="{{ my_page.url | prepend: site.baseurl }}">
-                            {% else %}
-                        <a href="{{ my_page.url | prepend: site.baseurl }}">
-                        {% endif %}
-                            <i class="fa fa-{{my_page.icon}}"></i>{{ my_page.title }}
-                        </a>
-                    </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+<header class="site-header" id="site-header">
+    <div class="header-container">
+        <!-- Logo and Site Title -->
+        <a href="{{ '/' | relative_url }}" class="site-logo">
+            <div class="logo-icon">N</div>
+            <span>{{ site.title | default: "Nanru1's Blog" }}</span>
+        </a>
+        
+        <!-- Navigation -->
+        <nav class="site-nav" id="site-nav">
+            <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">首页</a>
+            <a href="{{ '/archive/' | relative_url }}" class="nav-link {% if page.url contains '/archive' %}active{% endif %}">归档</a>
+            <a href="{{ '/category/' | relative_url }}" class="nav-link {% if page.url contains '/category' %}active{% endif %}">分类</a>
+            <a href="{{ '/tag/' | relative_url }}" class="nav-link {% if page.url contains '/tag' %}active{% endif %}">标签</a>
+            <a href="{{ '/about/' | relative_url }}" class="nav-link {% if page.url contains '/about' %}active{% endif %}">关于</a>
         </nav>
+        
+        <!-- Header Actions -->
+        <div class="header-actions">
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="theme-toggle" aria-label="切换主题">
+                <svg class="theme-icon sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="theme-icon moon-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+            
+            <!-- Login Button -->
+            <button class="login-btn" id="login-btn">
+                <svg class="login-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                    <polyline points="10,17 15,12 10,7"></polyline>
+                    <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+                登录
+            </button>
+        </div>
     </div>
 </header>

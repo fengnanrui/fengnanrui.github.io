@@ -1,49 +1,32 @@
 ---
 layout: page
-title: Collections
+title: 收藏
 permalink: /collection/
-icon: bookmark
-type: page
 ---
 
-* content
-{:toc}
+## Azure资源
 
-## 工具
+- [Azure官方文档](https://docs.microsoft.com/zh-cn/azure/)
+- [Azure PowerShell模块参考](https://docs.microsoft.com/zh-cn/powershell/azure/)
+- [Azure CLI参考](https://docs.microsoft.com/zh-cn/cli/azure/)
 
-* [box-shadow generator](http://www.cssmatic.com/box-shadow)
+## PowerShell资源
 
-    生成 box-shadow 的工具。
+- [PowerShell官方文档](https://docs.microsoft.com/zh-cn/powershell/)
+- [PowerShell Gallery](https://www.powershellgallery.com/)
 
-* [gradient-generator](http://www.cssmatic.com/gradient-generator)
+## 博客推荐
 
-    渐变生成器。
+- [Azure官方博客](https://azure.microsoft.com/zh-cn/blog/)
+- [PowerShell Team Blog](https://devblogs.microsoft.com/powershell/)
 
-* [Ultimate CSS Gradient Generator](http://www.colorzilla.com/gradient-editor/)
+## 工具推荐
 
-    也是渐变生成器
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [PowerShell ISE](https://docs.microsoft.com/zh-cn/powershell/scripting/windows-powershell/ise/introducing-the-windows-powershell-ise)
+- [Azure Storage Explorer](https://azure.microsoft.com/zh-cn/features/storage-explorer/)
 
-* [CSS Generators -CSSREFLEX](http://www.cssreflex.com/css-generators/)
+## 学习资源
 
-    CSS3 生成器
-
-- [tiny png](https://tinypng.com/)
-
-    用于压缩 png 或 jpg 的在线工具
-
-* [图床 https://sm.ms/](https://sm.ms/)
-
-    有 API 可用。
-
-* [新浪微博图床 Chrome扩展](https://github.com/Suxiaogang/WeiboPicBed)
-
-
-## GitBook 及其插件
-
-* [Gitbook 的使用和常用插件 -赵达](http://zhaoda.net/2015/11/09/gitbook-plugins/)
-* [gitbook-plugin-expandable-chapters](https://plugins.gitbook.com/plugin/expandable-chapters)
-
-
-## Comments
-
-{% include comments.html %}
+- [Microsoft Learn](https://docs.microsoft.com/zh-cn/learn/)
+- [Pluralsight](https://www.pluralsight.com/)

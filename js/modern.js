@@ -132,52 +132,65 @@
     // Theme Manager
     const themeManager = {
         init() {
+            console.log('Theme manager initializing...');
             this.loadTheme();
             this.bindEvents();
-            console.log('Theme manager initialized'); // 添加调试日志
+            console.log('Theme manager initialized');
         },
         
         loadTheme() {
-            const savedTheme = localStorage.getItem('blog-theme') || 'light';
-            this.setTheme(savedTheme);
+            try {
+                const savedTheme = localStorage.getItem('blog-theme') || 'light';
+                console.log('Loading saved theme:', savedTheme);
+                this.setTheme(savedTheme);
+            } catch (e) {
+                console.error('Error loading theme:', e);
+                this.setTheme('light'); // 默认亮色模式
+            }
         },
         
         setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('blog-theme', theme);
             this.updateThemeIcon(theme);
+            console.log('Theme set to:', theme);
         },
         
         toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            console.log('Toggling theme to:', newTheme); // 添加调试日志
+            console.log('Toggling theme from', currentTheme, 'to', newTheme);
             this.setTheme(newTheme);
         },
         
         updateThemeIcon(theme) {
-            const sunIcon = utils.$('.sun-icon');
-            const moonIcon = utils.$('.moon-icon');
+            const sunIcon = document.querySelector('.sun-icon');
+            const moonIcon = document.querySelector('.moon-icon');
+            
+            if (!sunIcon || !moonIcon) {
+                console.warn('Theme icons not found in DOM');
+                return;
+            }
             
             if (theme === 'dark') {
-                utils.addClass(sunIcon, 'hidden');
-                utils.removeClass([moonIcon], 'hidden');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
             } else {
-                utils.addClass(moonIcon, 'hidden');
-                utils.removeClass([sunIcon], 'hidden');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
             }
         },
         
-        // 确保绑定事件正确
         bindEvents() {
             const themeToggle = document.getElementById('theme-toggle');
             if (themeToggle) {
+                console.log('Theme toggle button found, binding click event');
                 themeToggle.addEventListener('click', () => {
-                    console.log('Theme toggle clicked'); // 添加调试日志
+                    console.log('Theme toggle clicked');
                     this.toggleTheme();
                 });
             } else {
-                console.error('Theme toggle button not found'); // 添加错误日志
+                console.error('Theme toggle button not found in DOM');
             }
         }
     };

@@ -1,31 +1,27 @@
 ---
 layout: page
-title: About
+title: 关于我
 permalink: /about/
-icon: heart
-type: page
 ---
 
-* content
-{:toc}
+## Nanru1
 
-## 关于我
+Azure Support Engineer，专注于云服务技术分享与实践。
 
-<!-- <iframe src="https://github.com/fengnanrui" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameBorder="0"></iframe> -->
+我在Azure云服务领域有丰富的经验，擅长解决各类云服务技术问题，特别是在以下领域:
 
+- Azure资源管理与监控
+- PowerShell自动化脚本开发
+- Azure AD/Entra ID身份认证与安全
+- 云服务性能优化
 
+### 联系方式
 
-## 联系我
+- Email: [fengnanrui@163.com](mailto:fengnanrui@163.com)
+- GitHub: [fengnanrui](https://github.com/fengnanrui)
 
-* GitHub：[Fengnanrui](https://github.com/fengnanrui)
-* email ：fengnanrui@163.com
-* Weibo ：[Weibo](http://weibo.com/7543229523)
+### 关于本站
 
+本站使用Jekyll搭建，托管在GitHub Pages上，主要分享Azure云服务技术文章、PowerShell脚本示例以及云服务最佳实践等内容。
 
-## 友情链接
-
-[暂无](https://github.com/fengnanrui) \| 
-
-## Comments
-
-{% include comments.html %}
+感谢您的访问！
