@@ -1,7 +1,5 @@
 ---
-# Modern Jekyll Blog Styles
 ---
-
 @charset "utf-8";
 
 // 引入变量
@@ -13,12 +11,8 @@
 @import "modern-post";
 @import "modern-archive"; // 添加归档样式
 @import "modern-auth";
+@import "modern-player"; // 音乐播放器样式
 @import "syntax-highlighting"; // 代码高亮
-
-// 全局基础样式
-:root {
-  color-scheme: light dark; // 添加此行支持系统级深色模式
-}
 
 // 确保页面一致性的全局样式
 body {
@@ -28,22 +22,18 @@ body {
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   transition: background-color 0.3s ease, color 0.3s ease;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
 }
 
 a {
   color: var(--color-primary);
   transition: color 0.2s ease;
-  text-decoration: none;
   
   &:hover {
     color: var(--color-primary-hover);
   }
 }
 
-// 常用容器样式
+// 确保所有容器使用同样的基础样式
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -66,9 +56,15 @@ a {
   display: none !important;
 }
 
-// 修复主题图标样式
-.theme-icon {
-  width: 24px;
-  height: 24px;
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
