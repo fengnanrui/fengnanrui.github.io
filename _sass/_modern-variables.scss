@@ -1,55 +1,59 @@
-// Modern Design System Variables
+// =========================================
+// 现代设计系统变量
+// 更新日期：2024年
+// 用途：定义网站全局样式变量
+// =========================================
 
-// Color Palette
+// 色彩系统
 :root {
-  // Primary Colors
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
+  // 主色调 - 使用更现代的蓝色渐变
+  --color-primary: #3b82f6;  // 明亮的蓝色
+  --color-primary-hover: #2563eb;
   --color-primary-light: #dbeafe;
   
-  // Secondary Colors
-  --color-secondary: #7c3aed;
-  --color-secondary-hover: #6d28d9;
+  // 辅助色 - 紫色系
+  --color-secondary: #8b5cf6;  // 明亮的紫色
+  --color-secondary-hover: #7c3aed;
   --color-secondary-light: #ede9fe;
   
-  // Accent Colors
+  // 强调色 - 琥珀色系
   --color-accent: #f59e0b;
   --color-accent-hover: #d97706;
   --color-accent-light: #fef3c7;
   
-  // Neutral Colors - Light Mode
+  // 中性色 - 浅色模式
   --color-background: #ffffff;
-  --color-surface: #f8fafc;
+  --color-surface: #f9fafb;
   --color-surface-elevated: #ffffff;
-  --color-border: #e2e8f0;
-  --color-border-light: #f1f5f9;
+  --color-border: #e5e7eb;
+  --color-border-light: #f3f4f6;
   
-  // Text Colors - Light Mode
-  --color-text-primary: #1e293b;
-  --color-text-secondary: #64748b;
-  --color-text-muted: #94a3b8;
+  // 文本色 - 浅色模式
+  --color-text-primary: #111827;  // 更深的颜色提高可读性
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #9ca3af;
   --color-text-inverse: #ffffff;
   
-  // Status Colors
+  // 状态色
   --color-success: #10b981;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --color-info: #3b82f6;
   
-  // Shadows
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  // 阴影 - 更柔和
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.07), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
   
-  // Border Radius
+  // 圆角 - 略微增大
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-full: 9999px;
   
-  // Spacing
+  // 间距
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -58,10 +62,12 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
   
-  // Typography
+  // 字体系统 - 使用更现代的字体堆栈
   --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-family-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  --font-family-heading: 'Inter', system-ui, sans-serif;
   
+  // 字号 - 稍微优化
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -72,59 +78,70 @@
   --font-size-4xl: 2.25rem;
   --font-size-5xl: 3rem;
   
+  // 字重
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
   
+  // 行高
   --line-height-tight: 1.25;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.75;
   
-  // Transitions
-  --transition-fast: 150ms ease-in-out;
-  --transition-normal: 300ms ease-in-out;
-  --transition-slow: 500ms ease-in-out;
+  // 过渡效果
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
   
-  // Z-index
+  // Z轴索引
   --z-dropdown: 1000;
   --z-sticky: 1020;
   --z-fixed: 1030;
   --z-modal: 1040;
   --z-popover: 1050;
   --z-tooltip: 1060;
+  
+  // 新增：卡片效果
+  --card-hover-transform: translateY(-5px);
+  --card-hover-transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-// Dark Mode Variables
+// 深色模式变量
 [data-theme="dark"] {
-  // Background Colors - Dark Mode
-  --color-background: #0f172a;
-  --color-surface: #1e293b;
-  --color-surface-elevated: #334155;
-  --color-border: #334155;
-  --color-border-light: #475569;
+  // 背景色 - 深色模式 (使用更柔和的深色)
+  --color-background: #111827;
+  --color-surface: #1f2937;
+  --color-surface-elevated: #374151;
+  --color-border: #374151;
+  --color-border-light: #4b5563;
   
-  // Text Colors - Dark Mode
-  --color-text-primary: #e2e8f0;
-  --color-text-secondary: #cbd5e1;
-  --color-text-muted: #94a3b8;
-  --color-text-inverse: #1e293b;
+  // 文本色 - 深色模式
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #e5e7eb;
+  --color-text-muted: #9ca3af;
+  --color-text-inverse: #111827;
   
-  // Adjust shadows for dark mode
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+  // 深色模式下调整阴影
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  
+  // 深色模式下调整主色调
+  --color-primary: #60a5fa;
+  --color-primary-hover: #3b82f6;
+  --color-primary-light: #1e3a8a;
 }
 
-// Responsive Breakpoints
+// 响应式断点
 $breakpoint-sm: 640px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 1024px;
 $breakpoint-xl: 1280px;
 $breakpoint-2xl: 1536px;
 
-// Mixins for responsive design
+// 响应式设计混入
 @mixin mobile {
   @media (max-width: #{$breakpoint-sm - 1px}) {
     @content;
@@ -149,17 +166,17 @@ $breakpoint-2xl: 1536px;
   }
 }
 
-// Utility mixins
+// 工具混入
 @mixin card {
   background: var(--color-surface-elevated);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  transition: all var(--transition-normal);
+  transition: var(--card-hover-transition);
   
   &:hover {
     box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
+    transform: var(--card-hover-transform);
   }
 }
 
@@ -173,10 +190,14 @@ $breakpoint-2xl: 1536px;
   font-size: var(--font-size-base);
   cursor: pointer;
   transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
   
   &:hover {
     background: var(--color-primary-hover);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
   
@@ -201,11 +222,15 @@ $breakpoint-2xl: 1536px;
   font-size: var(--font-size-base);
   cursor: pointer;
   transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
   
   &:hover {
     background: var(--color-primary);
     color: var(--color-text-inverse);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
   }
 }
@@ -218,6 +243,7 @@ $breakpoint-2xl: 1536px;
   font-size: var(--font-size-base);
   color: var(--color-text-primary);
   transition: all var(--transition-fast);
+  width: 100%;
   
   &:focus {
     outline: none;
@@ -238,6 +264,23 @@ $breakpoint-2xl: 1536px;
   [data-theme="dark"] & {
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+// 新增：动画效果
+@mixin animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+@mixin animate-slide-up {
+  animation: slideUp 0.5s ease-out;
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
   }
 }
 
