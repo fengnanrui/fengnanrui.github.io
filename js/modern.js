@@ -134,22 +134,24 @@
         init() {
             this.loadTheme();
             this.bindEvents();
+            console.log('Theme manager initialized'); // 添加调试日志
         },
         
         loadTheme() {
-            const savedTheme = utils.storage.get(CONFIG.THEME_KEY) || 'light';
+            const savedTheme = localStorage.getItem('blog-theme') || 'light';
             this.setTheme(savedTheme);
         },
         
         setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
-            utils.storage.set(CONFIG.THEME_KEY, theme);
+            localStorage.setItem('blog-theme', theme);
             this.updateThemeIcon(theme);
         },
         
         toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            console.log('Toggling theme to:', newTheme); // 添加调试日志
             this.setTheme(newTheme);
         },
         
@@ -166,10 +168,17 @@
             }
         },
         
+        // 确保绑定事件正确
         bindEvents() {
-            utils.on(utils.$('#theme-toggle'), 'click', () => {
-                this.toggleTheme();
-            });
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    console.log('Theme toggle clicked'); // 添加调试日志
+                    this.toggleTheme();
+                });
+            } else {
+                console.error('Theme toggle button not found'); // 添加错误日志
+            }
         }
     };
     
