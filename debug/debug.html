@@ -1,0 +1,146 @@
+---
+layout: modern
+title: 调试工具
+permalink: /debug/
+---
+
+<div class="debug-container">
+  <h1>网站调试工具</h1>
+  
+  <div class="debug-section">
+    <h2>主题系统检查</h2>
+    <div>当前主题: <span id="current-theme">检测中...</span></div>
+    <div>localStorage值: <span id="storage-theme">检测中...</span></div>
+    <button id="toggle-theme" class="debug-btn">切换主题</button>
+  </div>
+  
+  <div class="debug-section">
+    <h2>DOM元素检查</h2>
+    <div id="element-check"></div>
+    <button id="check-elements" class="debug-btn">检查关键元素</button>
+  </div>
+  
+  <div class="debug-section">
+    <h2>CSS变量检查</h2>
+    <div class="color-grid">
+      <!-- 将在JS中填充 -->
+    </div>
+  </div>
+</div>
+
+<style>
+  .debug-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  .debug-section {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  
+  .debug-btn {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    margin: 1rem 0;
+    cursor: pointer;
+  }
+  
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .color-sample {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 0 0 2px rgba(0,0,0,0.5);
+    border-radius: var(--radius-sm);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 检查主题
+    function checkTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const storageTheme = localStorage.getItem('blog-theme');
+      
+      document.getElementById('current-theme').textContent = currentTheme || '未设置';
+      document.getElementById('storage-theme').textContent = storageTheme || '未设置';
+    }
+    
+    // 切换主题
+    document.getElementById('toggle-theme').addEventListener('click', function() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('blog-theme', newTheme);
+      
+      checkTheme();
+    });
+    
+    // 检查DOM元素
+    document.getElementById('check-elements').addEventListener('click', function() {
+      const elementIds = [
+        'theme-toggle',
+        'login-btn',
+        'site-nav',
+        'site-header',
+        'main-content'
+      ];
+      
+      const container = document.getElementById('element-check');
+      container.innerHTML = '';
+      
+      elementIds.forEach(id => {
+        const elem = document.getElementById(id);
+        const div = document.createElement('div');
+        div.innerHTML = `#${id}: <strong>${elem ? '存在' : '不存在'}</strong>`;
+        container.appendChild(div);
+      });
+    });
+    
+    // 显示CSS变量
+    function showCSSVariables() {
+      const colorVars = [
+        '--color-primary',
+        '--color-secondary',
+        '--color-accent',
+        '--color-background',
+        '--color-surface',
+        '--color-text-primary',
+        '--color-text-secondary',
+        '--color-border'
+      ];
+      
+      const container = document.querySelector('.color-grid');
+      container.innerHTML = '';
+      
+      colorVars.forEach(varName => {
+        const value = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+        const div = document.createElement('div');
+        div.className = 'color-sample';
+        div.style.backgroundColor = value;
+        div.textContent = varName;
+        container.appendChild(div);
+      });
+    }
+    
+    // 初始化
+    checkTheme();
+    showCSSVariables();
+  });
+</script>

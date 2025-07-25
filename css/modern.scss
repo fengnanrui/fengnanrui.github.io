@@ -4,19 +4,71 @@
 
 @charset "utf-8";
 
-// Import modern design system
+// 引入变量
 @import "modern-variables";
 @import "modern-base";
 @import "modern-header";
-@import "modern-home";
-
-// Import existing components (updated)
-@import "syntax-highlighting";
-@import "backToTop";
-
-// Additional modern components
-@import "modern-post";
-@import "modern-auth";
-@import "modern-upload";
 @import "modern-footer";
+@import "modern-home";
+@import "modern-post";
+@import "modern-archive"; // 添加归档样式
+@import "modern-auth";
+@import "syntax-highlighting"; // 代码高亮
+
+// 全局基础样式
+:root {
+  color-scheme: light dark; // 添加此行支持系统级深色模式
+}
+
+// 确保页面一致性的全局样式
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--color-primary);
+  transition: color 0.2s ease;
+  text-decoration: none;
+  
+  &:hover {
+    color: var(--color-primary-hover);
+  }
+}
+
+// 常用容器样式
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+// 全局动画效果
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+// 增加调试辅助类
+.debug-outline * {
+  outline: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+// 修复隐藏类
+.hidden {
+  display: none !important;
+}
+
+// 修复主题图标样式
+.theme-icon {
+  width: 24px;
+  height: 24px;
+}
 
