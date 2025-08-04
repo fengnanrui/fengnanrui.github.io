@@ -100,6 +100,15 @@
 </head>
 
 <body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="page-loader">
+        <div class="loader-content">
+            <div class="loader-logo">{{ site.title | slice: 0 | default: "N" }}</div>
+            <div class="loader-text">加载中...</div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+    
     <!-- Skip to main content for accessibility -->
     <a href="#main-content" class="sr-only">跳转到主要内容</a>
     
@@ -445,6 +454,83 @@
     <script src="{{ '/js/modern.js' | relative_url }}"></script>
     <script src="{{ '/js/animations.js' | relative_url }}"></script>
     <script src="{{ '/js/theme-switcher.js' | relative_url }}"></script>
+    
+    <!-- Page Load Enhancement Script -->
+    <script>
+        // 页面加载动画控制
+        document.addEventListener('DOMContentLoaded', function() {
+            const loader = document.getElementById('page-loader');
+            const minLoadTime = 1000; // 最少显示1秒
+            const startTime = performance.now();
+            
+            function hideLoader() {
+                const elapsedTime = performance.now() - startTime;
+                const remainingTime = Math.max(0, minLoadTime - elapsedTime);
+                
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                    // 添加页面内容动画
+                    document.body.classList.add('page-loaded');
+                }, remainingTime);
+            }
+            
+            // 确保所有资源加载完成
+            if (document.readyState === 'complete') {
+                hideLoader();
+            } else {
+                window.addEventListener('load', hideLoader);
+            }
+        });
+        
+        // 滚动动画观察器
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-slide-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // 观察所有需要动画的元素
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // 增强的鼠标跟踪效果
+        document.addEventListener('mousemove', function(e) {
+            // 创建鼠标跟踪光标效果
+            const cursor = document.querySelector('.cursor-glow');
+            if (!cursor) {
+                const glowElement = document.createElement('div');
+                glowElement.className = 'cursor-glow';
+                glowElement.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, rgba(102, 126, 234, 0.3), transparent);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 10000;
+                    transition: transform 0.1s ease;
+                `;
+                document.body.appendChild(glowElement);
+            }
+            
+            const glowCursor = document.querySelector('.cursor-glow');
+            if (glowCursor) {
+                glowCursor.style.left = e.clientX - 10 + 'px';
+                glowCursor.style.top = e.clientY - 10 + 'px';
+            }
+        });
+    </script>
     
     <!-- Service Worker for PWA -->
     <script>

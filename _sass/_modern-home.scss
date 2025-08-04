@@ -29,11 +29,14 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: var(--space-3xl) 0;
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+  background: var(--gradient-rainbow);
+  background-size: 400% 400%;
   border-radius: var(--radius-xl);
   margin-bottom: var(--space-2xl);
   position: relative;
   overflow: hidden;
+  animation: gradientShift 8s ease-in-out infinite;
+  box-shadow: var(--shadow-xl), var(--glow-primary);
   
   &::before {
     content: '';
@@ -43,7 +46,17 @@
     right: 0;
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-    opacity: 0.3;
+    opacity: 0.2;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 70%);
   }
   
   .hero-content {
@@ -55,10 +68,9 @@
     font-size: var(--font-size-5xl);
     font-weight: var(--font-weight-bold);
     margin-bottom: var(--space-md);
-    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    animation: slideUp var(--duration-slow) var(--ease-out-back);
     
     @include mobile {
       font-size: var(--font-size-3xl);
@@ -67,11 +79,13 @@
   
   .hero-subtitle {
     font-size: var(--font-size-xl);
-    color: var(--color-text-secondary);
+    color: rgba(255,255,255,0.9);
     margin-bottom: var(--space-lg);
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    animation: slideUp var(--duration-slow) var(--ease-out-back) 0.2s both;
     
     @include mobile {
       font-size: var(--font-size-lg);
@@ -83,17 +97,34 @@
     gap: var(--space-md);
     justify-content: center;
     flex-wrap: wrap;
+    animation: slideUp var(--duration-slow) var(--ease-out-back) 0.4s both;
     
     .btn-primary {
-      @include button-primary;
+      @include button-glass;
       font-size: var(--font-size-lg);
       padding: var(--space-md) var(--space-xl);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      animation: pulse 2s ease-in-out infinite;
+      
+      &:hover {
+        background: rgba(255,255,255,0.2);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: var(--shadow-xl), var(--glow-accent);
+      }
     }
     
     .btn-secondary {
-      @include button-secondary;
+      @include button-glass;
       font-size: var(--font-size-lg);
       padding: var(--space-md) var(--space-xl);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      
+      &:hover {
+        background: rgba(255,255,255,0.1);
+        transform: translateY(-2px);
+      }
     }
   }
 }
@@ -129,24 +160,88 @@
   @include card;
   padding: 0;
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: var(--card-hover-transition);
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp var(--duration-slow) var(--ease-out-back) both;
+  
+  // 延迟动画效果
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+  &:nth-child(5) { animation-delay: 0.5s; }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-rainbow);
+    opacity: 0;
+    transition: opacity var(--duration-normal) ease;
+    z-index: 2;
+  }
   
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
+    transform: var(--card-hover-transform);
+    box-shadow: var(--shadow-xl), var(--glow-primary);
+    
+    &::before {
+      opacity: 1;
+    }
+    
+    .article-image {
+      transform: scale(1.1);
+      filter: brightness(1.1);
+    }
   }
+}
   
   .article-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
-    background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary-light));
+    background: var(--gradient-sunset);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-primary);
+    color: white;
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--duration-slow) var(--ease-out-expo);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: rotate 10s linear infinite;
+      opacity: 0;
+      transition: opacity var(--duration-normal) ease;
+    }
+  }
+  
+  &:hover .article-image::after {
+    opacity: 1;
   }
   
   .article-content {
@@ -207,17 +302,34 @@
     margin-bottom: var(--space-md);
     
     .tag {
-      background: var(--color-surface);
-      color: var(--color-text-secondary);
+      background: var(--gradient-ocean);
+      color: white;
       padding: var(--space-xs) var(--space-sm);
       border-radius: var(--radius-full);
       font-size: var(--font-size-xs);
       text-decoration: none;
-      transition: all var(--transition-fast);
+      transition: all var(--duration-normal) var(--ease-out-back);
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left var(--duration-normal) ease;
+      }
       
       &:hover {
-        background: var(--color-primary-light);
-        color: var(--color-primary);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: var(--shadow-md), var(--glow-secondary);
+        
+        &::before {
+          left: 100%;
+        }
       }
     }
   }
@@ -282,8 +394,23 @@
       height: 80px;
       border-radius: var(--radius-full);
       margin: 0 auto var(--space-md);
-      border: 3px solid var(--color-border);
+      border: 3px solid transparent;
+      background: var(--gradient-rainbow);
+      padding: 3px;
       object-fit: cover;
+      transition: all var(--duration-normal) var(--ease-out-back);
+      position: relative;
+      
+      &:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: var(--glow-primary);
+      }
+      
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: var(--radius-full);
+      }
     }
     
     .bio {
@@ -301,18 +428,35 @@
         width: 36px;
         height: 36px;
         border-radius: var(--radius-full);
-        background: var(--color-surface);
+        background: var(--gradient-ocean);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--color-text-secondary);
+        color: white;
         text-decoration: none;
-        transition: all var(--transition-fast);
+        transition: all var(--duration-normal) var(--ease-out-back);
+        position: relative;
+        overflow: hidden;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
+          opacity: 0;
+          transition: opacity var(--duration-normal) ease;
+        }
         
         &:hover {
-          background: var(--color-primary);
-          color: white;
-          transform: translateY(-2px);
+          transform: translateY(-3px) scale(1.1);
+          box-shadow: var(--shadow-lg), var(--glow-primary);
+          
+          &::before {
+            opacity: 1;
+          }
         }
         
         .social-icon {
