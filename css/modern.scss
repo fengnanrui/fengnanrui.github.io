@@ -5,6 +5,7 @@
 // 引入变量
 @import "modern-variables";
 @import "modern-base";
+@import "modern-animations"; // 新增动画效果
 @import "modern-header";
 @import "modern-footer";
 @import "modern-home";
@@ -16,12 +17,41 @@
 
 // 确保页面一致性的全局样式
 body {
-  background-color: var(--color-background);
+  background: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-family-sans);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow-x: hidden;
+  
+  // 动态背景粒子效果
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(255, 236, 210, 0.1) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  // 深色模式下的背景调整
+  [data-theme="dark"] & {
+    &::before {
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+    }
+  }
 }
 
 a {
@@ -44,6 +74,85 @@ a {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+// 页面加载动画
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-rainbow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .loader-content {
+    text-align: center;
+    color: white;
+    
+    .loader-logo {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    .loader-text {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top: 3px solid white;
+      border-radius: 50%;
+      margin: 0 auto;
+      animation: spin 1s linear infinite;
+    }
+  }
+}
+
+// 滚动条美化
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-ocean);
+  border-radius: var(--radius-full);
+  
+  &:hover {
+    background: var(--gradient-rainbow);
+  }
+}
+
+// 选择文本颜色
+::selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: var(--color-text-primary);
+}
+
+::-moz-selection {
+  background: rgba(102, 126, 234, 0.3);
+  color: var(--color-text-primary);
 }
 
 // 增加调试辅助类
