@@ -1,17 +1,24 @@
-// 归档页面样式
+// 归档页面 · 极简时间线
+
 .archive-container {
-  max-width: 800px;
+  max-width: 760px;
   margin: 0 auto;
-  padding: 0 var(--space-md);
+  padding: var(--space-2xl) var(--space-xl);
+  @include mobile { padding: var(--space-lg) var(--space-md); }
 }
 
 .archive-year {
-  font-size: var(--font-size-3xl);
-  color: var(--color-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
   margin-top: var(--space-3xl);
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--color-primary);
+  display: inline-block;
+  letter-spacing: -0.02em;
+  
+  &:first-child { margin-top: 0; }
 }
 
 .archive-list {
@@ -19,24 +26,23 @@
 }
 
 .archive-item {
-  padding: var(--space-md) 0;
-  border-bottom: 1px solid var(--color-border-light);
+  padding: 0.75rem 0.875rem;
+  border-radius: var(--radius-lg);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-sm);
+  transition: background var(--transition-fast);
   
-  &:hover {
-    background-color: var(--color-surface);
-    border-radius: var(--radius-md);
-  }
+  &:hover { background: var(--color-surface); }
+  &:not(:last-child) { border-bottom: 1px solid var(--color-border-light); }
 }
 
 .post-date {
   font-family: var(--font-family-mono);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  min-width: 180px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  min-width: 140px;
 }
 
 .post-link {
@@ -44,39 +50,33 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-text-primary);
   text-decoration: none;
-  
-  &:hover {
-    color: var(--color-primary);
-  }
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast);
+  &:hover { color: var(--color-primary); }
 }
 
 .category-badge, .tag-badge {
   font-size: var(--font-size-xs);
-  padding: calc(var(--space-xs) / 2) var(--space-sm);
+  padding: 0.125rem 0.5rem;
   border-radius: var(--radius-full);
-  background-color: var(--color-surface-elevated);
-  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
 }
 
 .category-badge {
-  background-color: var(--color-primary-light);
+  background: var(--color-primary-light);
   color: var(--color-primary);
 }
 
 .tag-badge {
-  background-color: var(--color-secondary-light);
+  background: var(--color-secondary-light);
   color: var(--color-secondary);
 }
 
-// 响应式调整
 @media (max-width: 768px) {
   .archive-item {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-xs);
+    gap: 0.25rem;
   }
-  
-  .post-date {
-    min-width: unset;
-  }
+  .post-date { min-width: unset; }
 }
