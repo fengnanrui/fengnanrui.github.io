@@ -24,11 +24,11 @@
   }
 }
 
-// Hero
+// Hero – compact & elegant
 .hero-section {
   grid-column: 1 / -1;
   text-align: center;
-  padding: var(--space-4xl) var(--space-2xl);
+  padding: var(--space-2xl) var(--space-xl);
   background: var(--gradient-hero);
   border-radius: var(--radius-2xl);
   margin-bottom: var(--space-xl);
@@ -39,30 +39,30 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.12) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.08) 0%, transparent 60%);
     pointer-events: none;
   }
   
   .hero-content { position: relative; z-index: 1; }
   
   .hero-title {
-    font-size: var(--font-size-5xl);
+    font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-sm);
     color: white;
     letter-spacing: -0.02em;
-    @include mobile { font-size: var(--font-size-3xl); }
+    @include mobile { font-size: var(--font-size-2xl); }
   }
   
   .hero-subtitle {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     color: rgba(255,255,255,0.85);
-    margin-bottom: var(--space-xl);
-    max-width: 520px;
+    margin-bottom: var(--space-md);
+    max-width: 480px;
     margin-left: auto;
     margin-right: auto;
     line-height: var(--line-height-relaxed);
-    @include mobile { font-size: var(--font-size-base); }
+    @include mobile { font-size: var(--font-size-sm); }
   }
   
   .hero-actions {
@@ -75,15 +75,15 @@
       backdrop-filter: blur(8px);
       color: white;
       border: 1px solid rgba(255,255,255,0.3);
-      padding: 0.75rem 1.75rem;
+      padding: 0.5rem 1.25rem;
       border-radius: var(--radius-full);
       font-weight: var(--font-weight-medium);
-      font-size: var(--font-size-base);
+      font-size: var(--font-size-sm);
       text-decoration: none;
       transition: all var(--transition-normal);
       display: inline-flex;
       align-items: center;
-      gap: var(--space-sm);
+      gap: var(--space-xs);
       cursor: pointer;
     }
     

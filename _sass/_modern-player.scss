@@ -18,23 +18,28 @@
   
   .toggle-player-btn {
     position: absolute;
-    top: -30px;
+    top: -36px;
     right: 10px;
-    background: var(--color-primary);
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    background: var(--color-surface-elevated);
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-md);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-md);
-    transition: transform 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
     
     &:hover {
-      transform: scale(1.05);
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
     }
   }
   
@@ -159,7 +164,13 @@
 // 深色模式调整
 [data-theme="dark"] .music-player {
   .toggle-player-btn {
-    background: var(--color-primary);
+    background: var(--color-surface-elevated);
+    border-color: var(--color-border);
+    &:hover {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
   }
   
   .play-button {
